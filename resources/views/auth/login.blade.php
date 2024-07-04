@@ -1,47 +1,110 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+  
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+  
+          <!-- Bootstrap CSS -->
+          <link href="{{ asset('') }}assets/css/bootstrap.min.css" rel="stylesheet">
+          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+          <link href="{{ asset('') }}assets/css/style.css" rel="stylesheet">
+          <link href="{{ asset('') }}assets/css/tiny-slider.css" rel="stylesheet">
+          <link href="{{ asset('') }}assets/css/authentication.css" rel="stylesheet">
+          <title>Furni; Furniture and Interior Design</title>
+</head>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+<body>
+    <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Furni<span>.</span></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsFurni">
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                    </li>
+                    {{-- <li><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li><a class="nav-link" href="about.html">About us</a></li>
+                    <li><a class="nav-link" href="services.html">Services</a></li>
+                    <li><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact us</a></li> --}}
+                </ul>
+
+                <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+                    <li><a class="nav-link" href="{{ route('register') }}"><img src="{{ asset('assets/images/user.svg') }}"></a></li>
+                    {{-- <li><a class="nav-link" href="cart.html"><img src="{{ asset('assets/images/cart.svg') }}"></a></li> --}}
+                </ul>
+            </div>
+        </div>	
+    </nav>
+
+    <div class="login-container">
+        <div class="login-wrapper">
+            <div class="login-box">
+                <h1>Login</h1>
+                <form action="{{ route('login.user') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="text-center">Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
+            </div>
         </div>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <footer class="footer-section">
+        <div class="container relative">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">
+                        Furni<span>.</span></a>
+                    </div>
+                    <p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                    <ul class="list-unstyled custom-social">
+                        <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                    </ul>
+                </div>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <div class="border-top copyright">
+                    <div class="row pt-4">
+                        <div class="col-lg-6">
+                            <p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a> Distributed By <a hreff="https://themewagon.com">ThemeWagon</a>  <!-- License information: https://untree.co/license/ --></p>
+                        </div>
+
+                        <div class="col-lg-6 text-center text-lg-end">
+                            <ul class="list-unstyled d-inline-flex ms-auto">
+                                <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </footer>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+</body>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+</html>

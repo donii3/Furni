@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use function Laravel\Prompts\error;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -22,13 +24,23 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->authenticate();
+    
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
-        $request->session()->regenerate();
+        $credentials = $request->only('email', 'password');
+        if(Auth::attempt($credentials)){
+            return redirect()->intended(route('home'));
+        }
+        return redirect(route('login'))->with('error', 'login unsuccessful');
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // $request->session()->regenerate();
+
+        // return redirect()->intended(route('home', absolute: false));
     }
 
     /**
