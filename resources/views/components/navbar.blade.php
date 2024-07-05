@@ -23,7 +23,20 @@
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li><a class="nav-link" href="{{ route('register') }}"><img src="{{ asset('assets/images/user.svg') }}"></a></li>
+                <li>
+                    @if (Auth::check())
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a class="nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+                       {{ Auth::user()->name }}
+                    </a>
+                    @else
+                        <a class="nav-link" href="{{ route('register') }}"><img src="{{ asset('assets/images/user.svg') }}"></a>
+                    @endif
+                </li>
                 <li><a class="nav-link" href="cart.html"><img src="{{ asset('assets/images/cart.svg') }}"></a></li>
             </ul>
         </div>

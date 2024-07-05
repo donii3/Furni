@@ -10,4 +10,9 @@ class AppController extends Controller
     {
         return view('home');
     }
+
+    public function logout(Request $request)
+    {
+        return view('auth.login');
+    }
 }
